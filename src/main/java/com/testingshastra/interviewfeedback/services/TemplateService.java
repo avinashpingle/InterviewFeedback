@@ -8,9 +8,9 @@ import com.testingshastra.interviewfeedback.entities.Template;
 public interface TemplateService {
 
 
-	public List<Template> getTemplates(String userId);
-
-	public Template createTemplate(Template template, String userId);
-
-	public List<Question> getQuestions(String userId, long templateId);
+//	public List<Template> getTemplates(String userId);
+//
+//	public Template createTemplate(Template template, String userId);
+//
+//	public List<Question> getQuestions(String userId, long templateId);
 }

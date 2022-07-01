@@ -2,25 +2,29 @@ package com.testingshastra.interviewfeedback.entities;
 
 import java.util.List;
 
-public class Template {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-	private long id;
+@Entity
+public class Template {
+	@Id
+	private long templateId;
 	private String title;
-	private List<Question> questions;
-	
+	//private List<Question> questions;
+
 	public Template(long id, String title, List<Question> questions) {
 		super();
-		this.id = id;
+		this.templateId = id;
 		this.title = title;
-		this.questions = questions;
+	//	this.questions = questions;
 	}
 
-	public long getId() {
-		return id;
+	public long getTemplateId() {
+		return templateId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setTemplateId(long id) {
+		this.templateId = id;
 	}
 
 	public String getTitle() {
@@ -30,20 +34,18 @@ public class Template {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-	public List<Question> getQuestions() {
-		return questions;
-	}
-
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
-	}
+//
+//	public List<Question> getQuestions() {
+//		return questions;
+//	}
+//
+//	public void setQuestions(List<Question> questions) {
+//		this.questions = questions;
+//	}
 
 	@Override
 	public String toString() {
-		return "Template [id=" + id + ", title=" + title + ", questions=" + questions + "]";
+		return "Template [templateId=" + templateId + ", title=" + title + "]";
 	}
-	
-	
-	
+
 }
