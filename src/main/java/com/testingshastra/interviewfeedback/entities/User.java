@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -15,7 +18,8 @@ public class User {
 	private String password;
 	private String confirmPassword;
 	private String phone;
-//	private List<Template> userTemplates;
+	@OneToMany(mappedBy="user")
+	private List<Template> userTemplates;
 
 	public User(String id, String firstName, String lastName, String password, String confirmPassword, String phone) {
 		super();
@@ -26,7 +30,7 @@ public class User {
 		this.confirmPassword = confirmPassword;
 		this.phone = phone;
 		// Create empty arraylist of templates for new user
-	//	this.userTemplates = new ArrayList<Template>();
+		// this.userTemplates = new ArrayList<Template>();
 	}
 
 	public String getUserId() {
@@ -77,12 +81,12 @@ public class User {
 		this.phone = phone;
 	}
 
-//	public List<Template> getUserTemplates() {
-//		return userTemplates;
-//	}
-//
-//	public void setUserTemplates(List<Template> userTemplates) {
-//		this.userTemplates = userTemplates;
-//	}
+	public List<Template> getUserTemplates() {
+		return userTemplates;
+	}
+
+	public void setUserTemplates(List<Template> userTemplates) {
+		this.userTemplates = userTemplates;
+	}
 
 }

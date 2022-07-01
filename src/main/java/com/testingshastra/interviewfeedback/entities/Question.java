@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Question {
@@ -12,6 +14,8 @@ public class Question {
 	private String questionTitle;
 	//private Map<Integer, Integer> scales;
 	private String comment;
+	@ManyToOne
+	private Template template;
 
 	public Question() {
 		super();

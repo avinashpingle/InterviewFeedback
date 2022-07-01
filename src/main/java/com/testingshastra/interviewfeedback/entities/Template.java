@@ -4,19 +4,42 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Template {
 	@Id
 	private long templateId;
 	private String title;
-	//private List<Question> questions;
+	@ManyToOne
+	private User user;
+	@OneToMany(mappedBy = "template")
+	private List<Question> questions;
 
-	public Template(long id, String title, List<Question> questions) {
+	public Template(long id, String title, List<Question> questions, User user) {
 		super();
 		this.templateId = id;
 		this.title = title;
-	//	this.questions = questions;
+		this.questions = questions;
+		this.user=user;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
 	}
 
 	public long getTemplateId() {
@@ -45,7 +68,8 @@ public class Template {
 
 	@Override
 	public String toString() {
-		return "Template [templateId=" + templateId + ", title=" + title + "]";
+		return "Template [templateId=" + templateId + ", title=" + title + ", user=" + user + ", questions=" + questions
+				+ "]";
 	}
 
 }
