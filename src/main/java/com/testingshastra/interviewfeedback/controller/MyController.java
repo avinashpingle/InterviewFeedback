@@ -1,6 +1,7 @@
 package com.testingshastra.interviewfeedback.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,7 +56,7 @@ public class MyController {
 	}
 	
 	@GetMapping("/user/{userId}")
-	public User getUser(@PathVariable String userId) {
+	public Optional<User> getUser(@PathVariable String userId) {
 		return userService.getUser(userId);
 	}
 }

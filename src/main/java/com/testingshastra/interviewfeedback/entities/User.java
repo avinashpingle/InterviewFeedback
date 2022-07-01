@@ -3,34 +3,42 @@ package com.testingshastra.interviewfeedback.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-	private String id;
+@Entity
+public class User {
+	@Id
+	private String userId;
 	private String firstName;
 	private String lastName;
 	private String password;
 	private String confirmPassword;
 	private String phone;
+	@OneToMany(mappedBy="user")
 	private List<Template> userTemplates;
-	
+
 	public User(String id, String firstName, String lastName, String password, String confirmPassword, String phone) {
 		super();
-		this.id = id;
+		this.userId = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
 		this.phone = phone;
-		//Create empty arraylist of templates for new user
-		this.userTemplates = new ArrayList<Template>();
+		// Create empty arraylist of templates for new user
+		// this.userTemplates = new ArrayList<Template>();
 	}
 
-	public String getId() {
-		return id;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String id) {
+		this.userId = id;
 	}
 
 	public String getFirstName() {
@@ -81,6 +89,4 @@ public class User {
 		this.userTemplates = userTemplates;
 	}
 
-	
-	
 }

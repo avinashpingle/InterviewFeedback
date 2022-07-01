@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.testingshastra.interviewfeedback.entities.Question;
 import com.testingshastra.interviewfeedback.entities.Template;
 import com.testingshastra.interviewfeedback.entities.User;
+import com.testingshastra.interviewfeedback.repository.TemplateRepository;
+import com.testingshastra.interviewfeedback.repository.UserRepository;
 
 @Service
 public class TemplateServiceImpl implements TemplateService {
@@ -19,6 +21,11 @@ public class TemplateServiceImpl implements TemplateService {
 	@Autowired
 	UserService userService;
 
+	@Autowired
+	TemplateRepository tempRepo;
+	
+	@Autowired
+	UserRepository userRepo;
 	public TemplateServiceImpl() {
 
 	}
@@ -29,7 +36,7 @@ public class TemplateServiceImpl implements TemplateService {
 		List<User> users = userService.getUsers();
 		boolean isExistingUser = false;
 		for (User user : users) {
-			if (user.getId().equals(userId)) {
+			if (user.getUserId().equals(userId)) {
 				isExistingUser = true;
 				userTemplates = user.getUserTemplates();
 			}
@@ -40,12 +47,13 @@ public class TemplateServiceImpl implements TemplateService {
 		}
 		return userTemplates;
 	}
-
+//
 	@Override
 	public Template createTemplate(Template template, String userId) {
-		User user = userService.getUser(userId);
+		User user = userRepo.findById(userId).orElse(null); 
 		List<Template> userTemplates = user.getUserTemplates();
 		System.out.println("Existing templates: "+userTemplates.size());
+		tempRepo.save(template);
 		userTemplates.add(template);
 		user.setUserTemplates(userTemplates);
 		return template;
@@ -56,7 +64,7 @@ public class TemplateServiceImpl implements TemplateService {
 		List<Question> templateQuestions = new ArrayList<>();
 		List<Template> templates = getTemplates(userId);
 		for (Template template : templates) {
-			if (template.getId() == templateId)
+			if (template.getTemplateId() == templateId)
 				templateQuestions = template.getQuestions();
 		}
 		return templateQuestions;
